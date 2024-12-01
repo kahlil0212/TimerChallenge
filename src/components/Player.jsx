@@ -13,6 +13,8 @@ export default function Player() {
 
   function handleSubmit(){
    setPlayerName(playerName.current.value)
+   //to clear input. Not advisable but works in use case. Avoid manually manipulating the DOM
+   playerName.current.value = '';
   }
 
   return (
