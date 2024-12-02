@@ -27,7 +27,7 @@ const ResultModal = forwardRef(function ResultModal({ targetTime, remainingTime,
 
     return(
 
-        <dialog ref={showDialog} className="result-modal">
+        <dialog ref={showDialog} className="result-modal" onClose={onReset}>
             {userLost && <h2>You lost</h2>}
             {!userLost && <h2>Your score: {playerScore}</h2>}
             <p>The target time was <strong>{targetTime}</strong> seconds. </p>
