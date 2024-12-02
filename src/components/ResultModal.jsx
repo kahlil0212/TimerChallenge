@@ -1,4 +1,5 @@
 import { forwardRef, useImperativeHandle, useRef } from "react"
+import { createPortal } from "react-dom";
 
 /**
  * In order to show dialog and function properly needs to be called programatically. The React function forwardRef allows for the ref from one Modal/component to be sent to another
@@ -26,7 +27,7 @@ const ResultModal = forwardRef(function ResultModal({ targetTime, remainingTime,
     });
 
     return(
-
+        createPortal(
         <dialog ref={showDialog} className="result-modal" onClose={onReset}>
             {userLost && <h2>You lost</h2>}
             {!userLost && <h2>Your score: {playerScore}</h2>}
@@ -36,8 +37,9 @@ const ResultModal = forwardRef(function ResultModal({ targetTime, remainingTime,
             <form method="dialog" onSubmit={onReset}>
                 <button>Close</button>
             </form>
-        </dialog>
+        </dialog>, document.getElementById('modal')
     )
+)
 });
 
 export default ResultModal;
