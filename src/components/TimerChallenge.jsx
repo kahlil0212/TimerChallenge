@@ -19,7 +19,6 @@ export default function TimerChallenge({title, targetTime}) {
     //If we do not stop the timer in time and time runs out
     if(timeRemaing <= 0 ){
         clearInterval(timer.current)
-       setTimeRemaining(targetTime * 1000);
        showDialog.current.open();
     }
 
@@ -34,6 +33,10 @@ export default function TimerChallenge({title, targetTime}) {
 
     }
 
+    function handleReset(){
+        setTimeRemaining(targetTime * 1000);
+    }
+
     //Manually stopping the timer
     function handleStop() {
         clearInterval(timer.current);
@@ -42,7 +45,11 @@ export default function TimerChallenge({title, targetTime}) {
 
     return(
         <>
-            <ResultModal ref={showDialog} result="lost" targetTime={targetTime}/>
+            <ResultModal 
+            ref={showDialog} 
+            targetTime={targetTime}
+            remainingTime={timeRemaing}
+            onReset={handleReset}/>
             <section className="challenge">
                 <h2>{title}</h2>
                 <p className="challenge-title">
