@@ -12,6 +12,8 @@ const ResultModal = forwardRef(function ResultModal({ targetTime, remainingTime,
     const userLost = remainingTime <= 0;
     const formattedRemainingTime = (remainingTime / 1000).toFixed(2);
 
+    const playerScore = Math.round((1 -  (remainingTime / (targetTime * 1000))) * 100);
+
     /**
      * Allows to use callable functions outside of component when using refs
      */
@@ -27,6 +29,7 @@ const ResultModal = forwardRef(function ResultModal({ targetTime, remainingTime,
 
         <dialog ref={showDialog} className="result-modal">
             {userLost && <h2>You lost</h2>}
+            {!userLost && <h2>Your score: {playerScore}</h2>}
             <p>The target time was <strong>{targetTime}</strong> seconds. </p>
             <p> You stopped the timer with <strong>{formattedRemainingTime} seconds left</strong></p>
 
