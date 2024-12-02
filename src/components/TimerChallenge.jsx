@@ -17,7 +17,8 @@ export default function TimerChallenge({title, targetTime}) {
         timer.current = setTimeout(() => {
             setIsTimeExpired(true);
             //Used to display modal when challenge is lost and function as expected with built-in backdrop
-            showDialog.current.showModal();
+            //uses function from result modal to decouple from time challenge component
+            showDialog.current.open();
         }, targetTime * 1000);
 
         setIsTimeStarted(true);
