@@ -10,11 +10,14 @@ export default function TimerChallenge({title, targetTime}) {
     const [isTimeStarted, setIsTimeStarted] = useState(false);
 
     const timer = useRef();
+    const showDialog = useRef();
 
 
     function handleStart(){
         timer.current = setTimeout(() => {
             setIsTimeExpired(true);
+            //Used to display modal when challenge is lost and function as expected with built-in backdrop
+            showDialog.current.showModal();
         }, targetTime * 1000);
 
         setIsTimeStarted(true);
@@ -26,7 +29,7 @@ export default function TimerChallenge({title, targetTime}) {
 
     return(
         <>
-            {isTimeExpired && <ResultModal result="lost" targetTime={targetTime}/>}
+            <ResultModal ref={showDialog} result="lost" targetTime={targetTime}/>
             <section className="challenge">
                 <h2>{title}</h2>
                 <p className="challenge-title">
